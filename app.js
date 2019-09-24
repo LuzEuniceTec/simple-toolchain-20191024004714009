@@ -58,7 +58,7 @@ console.log(cont);
   if (error) {
     console.log(error);
   } else {
-    //console.log(JSON.stringify(profile, null, 2));
+    console.log(JSON.stringify(profile, null, 2));
     x = profile;
     var audaciaN = JSON.stringify(x.personality[0].children[0].name, null, 2);
     var audaciaP = JSON.stringify(x.personality[0].children[0].percentile, null, 2);
