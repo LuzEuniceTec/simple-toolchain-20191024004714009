@@ -3,5 +3,7 @@ applications:
 - path: .
   memory: 256M
   instances: 1
-  name: PersonalityInsights
+  host: simple-website-pInsightED
+  name: simple-website-pInsightED
+  
   random-route: true
