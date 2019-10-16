@@ -13,7 +13,8 @@ var Estructurador = require('./Estructurador');
 var personalityInsights = new PersonalityInsightsV3({
   version_date: '2017-10-13',
   username: 'apikey',
-  password: 'sespzkgaTh0V6Sp4ht5PD5f63b3AG7BF_aFwJXo3Q_9s'
+  password: '6m4VFKirgTcnOp10YWzFPzPO9yKv2ygsYxMM5FIVOF7i'
+  
 });
 
 var urlencodedParser = bodyParser.urlencoded({ extended: false });
@@ -62,6 +63,7 @@ console.log(cont);
     x = profile;
     var audaciaN = JSON.stringify(x.personality[0].children[0].name, null, 2);
     var audaciaP = JSON.stringify(x.personality[0].children[0].percentile, null, 2);
+    
     var inAr = JSON.stringify(x.personality[0].children[1].name, null, 2);
     var inArP = JSON.stringify(x.personality[0].children[1].percentile, null, 2);
     var emocional = JSON.stringify(x.personality[1].children[2].name, null, 2);
