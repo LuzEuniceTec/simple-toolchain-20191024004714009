@@ -2,7 +2,7 @@ body
 {
     padding-top: 5%;
     margin: 0;
-    background: rgb(52, 53, 53);
+    background: rgb(244, 246, 246);
 
 }
 input[type=text], select {
@@ -50,7 +50,7 @@ div {
 
 .logos
 {
-    padding-left: 20px;
+   padding-left: 20px;
    height: 15%;
    width: 15%;
 }
