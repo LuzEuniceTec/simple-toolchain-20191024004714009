@@ -73,7 +73,8 @@ console.log(cont);
     var intelec = JSON.stringify(x.personality[0].children[4].name, null, 2);
     var intelecP = JSON.stringify(x.personality[0].children[4].percentile, null, 2);
     var y=Estructurador.cleansing(x);
-    console.log(y);
+    console.log(x);
+	console.log(y);
 
   }
   res.render('profile', {
