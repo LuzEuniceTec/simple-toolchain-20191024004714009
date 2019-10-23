@@ -1,5 +1,6 @@
-function Estructurador(data){
+function Estructurador(data,clave){
     x = data;
+	
 
     var apertura = x.personality[0].name;
     var aperturaP= x.personality[0].percentile;
@@ -10,8 +11,8 @@ function Estructurador(data){
     var inAr = x.personality[0].children[1].name;
     var inArP = x.personality[0].children[1].percentile;
 
-    var emocional = x.personality[1].children[2].name;
-    var emocionalP = x.personality[1].children[2].percentile;
+    var emocional = x.personality[0].children[2].name;
+    var emocionalP = x.personality[0].children[2].percentile;
 
     var imagin = x.personality[0].children[3].name;
     var imaginP = x.personality[0].children[3].percentile;
@@ -305,6 +306,7 @@ function Estructurador(data){
     var volunS = x.consumption_preferences[7].consumption_preferences[0].score;
 
     var y = {
+		["clave"]:{N: String(clave)},
         [apertura]: {N: String(aperturaP)},
         [audacia]: {N: String(audaciaP)},
         [inAr]: {N: String(inArP)},

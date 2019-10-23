@@ -5,6 +5,23 @@ const path = require('path');
 const bodyParser = require('body-parser');
 
 
+//////////////////////////////////////////////////////////////////////////////
+
+
+// Load the SDK and UUID
+var AWS = require('aws-sdk');
+var uuid = require('uuid');
+
+// Create an S3 client
+var s3 = new AWS.S3();
+
+var bucketName = 'node-sdk-sample-' + uuid.v4();
+
+var datelocal = new Date().toISOString();
+
+///////////////////////////////////////////////////////////////////////////////
+
+
 var PersonalityInsightsV3 = require('watson-developer-cloud/personality-insights/v3');
 var fs = require('fs');
 var Estructurador = require('./Estructurador');
@@ -42,9 +59,12 @@ app.post('/upload', urlencodedParser ,(req, res) => {
 
 var cont = JSON.stringify(req.body.p1 + req.body.p2 + req.body.p3 + req.body.p4 + req.body.p5);
 
+var keyName = req.body.p2+'-'+ datelocal+'.txt';
+
+
 
 var audaciaN;
-console.log(cont);
+//console.log(cont);
   var profileParams = {
     // Get the content from the JSON file.
 
@@ -61,6 +81,7 @@ console.log(cont);
   } else {
     //console.log(JSON.stringify(profile, null, 2));
     x = profile;
+	
     var audaciaN = JSON.stringify(x.personality[0].children[0].name, null, 2);
     var audaciaP = JSON.stringify(x.personality[0].children[0].percentile, null, 2);
     
@@ -72,9 +93,35 @@ console.log(cont);
     var imaginP = JSON.stringify(x.personality[0].children[3].percentile, null, 2);
     var intelec = JSON.stringify(x.personality[0].children[4].name, null, 2);
     var intelecP = JSON.stringify(x.personality[0].children[4].percentile, null, 2);
-    var y=Estructurador.cleansing(x);
-    console.log(x);
-	console.log(y);
+    var y=Estructurador.cleansing(x,req.body.p2);
+    //console.log(x);
+	//console.log(y);
+	//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///{"Apertura a experiencias":{"N":"0.9879391276813483"}
+var bucketName = 'pruebasinsight/Estructurador' ;
+ // var params = {Bucket: bucketName, Key: keyName, Body: '"Nombre":'+'{"N":"'+req.body.p2+'"},' +JSON.stringify(y)};
+  var params = {Bucket: bucketName, Key: keyName, Body: JSON.stringify(y)};
+  s3.putObject(params, function(err, data) {
+    if (err)
+      console.log(err)
+    else
+      console.log("Successfully uploaded data to " + bucketName + "/" + keyName);
+  });
+  
+  
+  ///{"Apertura a experiencias":{"N":"0.9879391276813483"}
+var bucketName = 'pruebasinsight/Original' ;
+  var params = {Bucket: bucketName, Key: keyName, Body: JSON.stringify(x)};
+  s3.putObject(params, function(err, data) {
+    if (err)
+      console.log(err)
+    else
+      console.log("Successfully uploaded data to " + bucketName  + keyName);
+  });
+
+////////////////////////////////////////////////////////////////////////////////////////////////
 
   }
   res.render('profile', {
